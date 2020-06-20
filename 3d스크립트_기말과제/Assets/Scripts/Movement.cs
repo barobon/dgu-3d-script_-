@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public static bool dead = false;
+    public static int score = 0;
+
     public float speed = 10f;
     public float jumpForce = 6f;
     public float turnSpeed = 30f;
@@ -12,6 +15,7 @@ public class Movement : MonoBehaviour
     Vector3 move;
     Quaternion rotation = Quaternion.identity;
     Rigidbody m_rigidbody;
+    CapsuleCollider m_collider;
 
     private float horizontal = 0;
     private float vertical = 0;
@@ -24,6 +28,7 @@ public class Movement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
+        m_collider = GetComponent<CapsuleCollider>();
     }
 
     void FixedUpdate()
@@ -36,8 +41,18 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        if (dead == false)
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+        }
+        else if (dead == true)
+        {
+            m_rigidbody.velocity = Vector3.zero;
+            horizontal = 0;
+            vertical = 0;
+        }
+        
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
@@ -65,7 +80,7 @@ public class Movement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump") && dead == false)
         {
             if (!isJumping)
             {
@@ -101,6 +116,11 @@ public class Movement : MonoBehaviour
                 m_rigidbody.velocity = Vector3.zero;
             }
             //animator.SetBool("isJumping", isJumping);
+        }
+
+        if(collision.gameObject.CompareTag("GameOver"))
+        {
+            dead = true;
         }
     }
 

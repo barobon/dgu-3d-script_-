@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BoxScript : MonoBehaviour
 {
     private bool clicked = false;
     private bool trap = false;
-
-    public Text ScoreText;
+    private int score;
 
     // Start is called before the first frame update
     void Start()
     {
-        //ScoreText = Movement.score.ToString();
+        
     }
 
     // Update is called once per frame
@@ -29,10 +27,10 @@ public class BoxScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       if (collision.gameObject.CompareTag("Player"))
+       if (collision.gameObject.CompareTag("Player") && clicked == false)
         {
             clicked = true;
-            Movement.score++;
+            GameOver.score++;
         }
     }
 }

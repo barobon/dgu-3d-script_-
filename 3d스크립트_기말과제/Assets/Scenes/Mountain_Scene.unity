@@ -320,6 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90553ea18eebaf143804da1ae77bdc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreText: {fileID: 1138058497}
 --- !u!1001 &41525776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1549,7 +1550,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: d8c195ca0ca98284c812c4f82d1072f6, type: 3}
       propertyPath: m_Name
-      value: cloud
+      value: enemy
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d8c195ca0ca98284c812c4f82d1072f6, type: 3}
       propertyPath: m_TagString
@@ -6198,7 +6199,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 0
 --- !u!222 &1138058498
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7165,6 +7166,18 @@ CapsuleCollider:
   m_Height: 2.2114835
   m_Direction: 1
   m_Center: {x: -0.091718435, y: -0.01971531, z: 0.039355695}
+--- !u!114 &1276542700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276542698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0296127d884467b4d81ebd3d3f212a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1280266496
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     Vector3 move;
     Quaternion rotation = Quaternion.identity;
     Rigidbody m_rigidbody;
+    Transform m_transform;
     CapsuleCollider m_collider;
 
     private float horizontal = 0;
@@ -26,6 +27,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
@@ -41,6 +43,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Fallen();
+
         if (dead == false)
         {
             horizontal = Input.GetAxis("Horizontal");
@@ -60,7 +64,7 @@ public class Movement : MonoBehaviour
 
         if (isJumping && m_rigidbody.velocity.y < 0)
         {
-            m_rigidbody.mass = 3;
+            Physics.gravity = new Vector3(0, -20f, 0);
         }
 
         animator.SetBool("isRunning", isRunning);
@@ -99,7 +103,11 @@ public class Movement : MonoBehaviour
             
         
     }
-
+    void Fallen()
+    {
+        if (m_transform.position.y < -1)
+            dead = true;
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -112,7 +120,7 @@ public class Movement : MonoBehaviour
                 animator.SetBool("isJumping", isJumping);
                 animator.SetBool("isGrounded", isGrounded);
 
-                m_rigidbody.mass = 1;
+                Physics.gravity = new Vector3(0, -9.8f, 0);
                 m_rigidbody.velocity = Vector3.zero;
             }
             //animator.SetBool("isJumping", isJumping);

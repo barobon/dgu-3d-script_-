@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Movement : MonoBehaviour
 {
     public static bool dead = false;
-    public static int score = 0;
 
     public float speed = 10f;
+    private float backupSpeed;
     public float jumpForce = 6f;
     public float turnSpeed = 30f;
+    public Transform startPos;
 
     Animator animator;
     Vector3 move;
@@ -31,6 +32,8 @@ public class Movement : MonoBehaviour
         animator = GetComponent<Animator>();
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
+        startPos = transform;
+        backupSpeed = speed;
     }
 
     void FixedUpdate()
@@ -55,8 +58,8 @@ public class Movement : MonoBehaviour
             m_rigidbody.velocity = Vector3.zero;
             horizontal = 0;
             vertical = 0;
-        }
-        
+            RestartFunc();
+        } 
 
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
@@ -69,6 +72,7 @@ public class Movement : MonoBehaviour
 
         animator.SetBool("isRunning", isRunning);
     }
+
 
     void Run()
     {
@@ -131,6 +135,20 @@ public class Movement : MonoBehaviour
             dead = true;
         }
     }
+    void RestartFunc()
+    {
+        if (dead)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                dead = false;
+                GameOver.score = 0;
+                SceneManager.LoadScene("Start_Scene");
+            }
+        }
+    }
 
 }
+
+
 

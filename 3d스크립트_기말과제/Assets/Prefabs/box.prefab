@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3895764988439652206}
   - component: {fileID: 7758395459713293553}
   - component: {fileID: 7755795871965160006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 8181847413471423478}
   - component: {fileID: 7235669322039959666}
   - component: {fileID: 3971232869965321603}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,4 +250,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c289e9181275f4c8abe5af5274ca38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreText: {fileID: 0}

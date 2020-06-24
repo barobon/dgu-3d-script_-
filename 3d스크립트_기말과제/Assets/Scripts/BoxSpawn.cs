@@ -7,16 +7,17 @@ public class BoxSpawn : MonoBehaviour
     public GameObject BoxPrefab;
     public int count = 10;
 
-    public float yDelta = 5;
+    public float yMinDelta = 5;
     public float xzMinDelta = 1.5f;
     public float xz = 6f;
+    public float yRan = 2f;
     public float spawnIntervalMax=2.5f;
     public float spawnIntervalMin = 0.5f;
     private float spawnInterval;
     private float recentSpawn;
 
     private float xPos=0;
-    private float yPos=0;
+    private float yPos=-3;
     private float zPos=0;
 
     private int currentIdx = 0;
@@ -40,17 +41,21 @@ public class BoxSpawn : MonoBehaviour
     void Update()
     {
         if (Movement.dead)
+        {
             return;
+        }
+
+            
 
         if(Time.time >= recentSpawn + spawnInterval)
         {
             recentSpawn = Time.time;
             spawnInterval = Random.Range(spawnIntervalMin, spawnIntervalMax);
 
-            float xDelta = Random.Range(0, xz);
+            float xDelta = Random.Range(0f, xz);
             float zDelta = 6 - xDelta;
             xPos += xzMinDelta + xDelta;
-            yPos += yDelta;
+            yPos += yMinDelta + Random.Range(0f, yRan);
             zPos += xzMinDelta + zDelta;
 
             Box[currentIdx].SetActive(false);
@@ -62,5 +67,13 @@ public class BoxSpawn : MonoBehaviour
                 currentIdx = 0;
         }
 
+    }
+
+    void OnEnable()
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Box[i].transform.position= poolPosition.position;
+        }
     }
 }

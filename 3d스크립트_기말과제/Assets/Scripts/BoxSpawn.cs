@@ -10,6 +10,7 @@ public class BoxSpawn : MonoBehaviour
     public float yMinDelta = 5;
     public float xzMinDelta = 1.5f;
     public float xz = 6f;
+    private float backupXZ;
     public float yRan = 2f;
     public float spawnIntervalMax=2.5f;
     public float spawnIntervalMin = 0.5f;
@@ -26,6 +27,7 @@ public class BoxSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        backupXZ = xz;
         spawnInterval = 0f;
         recentSpawn = 0f;
         poolPosition = GetComponent<Transform>();
@@ -44,7 +46,14 @@ public class BoxSpawn : MonoBehaviour
         {
             return;
         }
-
+        if(Movement.boosted)
+        {
+            xz = backupXZ + backupXZ * Movement.boostRate * Movement.level;
+        }
+        if (Movement.restarted)
+        {
+            xz = backupXZ;
+        }
             
 
         if(Time.time >= recentSpawn + spawnInterval)
@@ -53,7 +62,7 @@ public class BoxSpawn : MonoBehaviour
             spawnInterval = Random.Range(spawnIntervalMin, spawnIntervalMax);
 
             float xDelta = Random.Range(0f, xz);
-            float zDelta = 6 - xDelta;
+            float zDelta = xz - xDelta;
             xPos += xzMinDelta + xDelta;
             yPos += yMinDelta + Random.Range(0f, yRan);
             zPos += xzMinDelta + zDelta;

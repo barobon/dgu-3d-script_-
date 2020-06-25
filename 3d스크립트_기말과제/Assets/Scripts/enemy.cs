@@ -8,8 +8,9 @@ public class enemy : MonoBehaviour
     private Transform m_transform;
     private Transform player;
     public Transform startPos;
-    public float Speed;
+    public float Speed=4;
     private float dist;
+    private float backupSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class enemy : MonoBehaviour
         startPos = transform;
         m_transform = GetComponent<Transform>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        backupSpeed = Speed;
     }
 
     // Update is called once per frame
@@ -26,6 +28,12 @@ public class enemy : MonoBehaviour
         GameOver.enemyDist = dist;
         m_transform.Translate(Vector3.forward*Speed*Time.deltaTime);
         m_transform.LookAt(player.transform);
+        if (Movement.boosted)
+        {
+            Speed = backupSpeed + backupSpeed * Movement.boostRate * Movement.level;
+        }
+        if (Movement.restarted)
+            Speed = backupSpeed;
     }
 
 }

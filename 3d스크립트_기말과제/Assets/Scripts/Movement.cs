@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 public class Movement : MonoBehaviour
 {
     public static bool dead = false;
+    public static bool boosted = false;
+    public static bool restarted = false;
+    public static float boostRate = 0.3f;
+    public static float level = 1;   
 
     public float speed = 10f;
     private float backupSpeed;
@@ -34,6 +38,7 @@ public class Movement : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
         startPos = transform;
+        backupSpeed = speed;
         m_audioSource = GetComponent<AudioSource>();
     }
 
@@ -50,6 +55,13 @@ public class Movement : MonoBehaviour
         if (Input.GetKey("escape"))
             Application.Quit();
         Fallen();
+
+        if (GameOver.score >= 10 * level)
+        {
+            speed = backupSpeed + backupSpeed * boostRate*level;
+            level += 1;
+            boosted = true;
+        }
 
         if (dead == false)
         {
@@ -74,6 +86,13 @@ public class Movement : MonoBehaviour
         }
 
         animator.SetBool("isRunning", isRunning);
+    }
+    void LateUpdate()
+    {
+        if (boosted)
+            boosted = false;
+        if (restarted)
+            restarted = false;
     }
 
 
@@ -145,9 +164,11 @@ public class Movement : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
+                speed = backupSpeed;
                 dead = false;
                 GameOver.score = 0;
                 SceneManager.LoadScene("Start_Scene");
+                restarted = true;
             }
         }
     }

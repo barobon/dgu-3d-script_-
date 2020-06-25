@@ -15,10 +15,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -898,5 +896,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Menu_Scene.unity
   - Assets/Scenes/Start_Scene.unity
-  playerPath: "D:/\uD559\uAD50 \uACF5\uBD80/3\uD559\uB144/3d\uAC8C\uC784/gitHub/dgu-3d-script_-/3d\uC2A4\uD06C\uB9BD\uD2B8_\uAE30\uB9D0\uACFC\uC81C/\uAC8C\uC784
-    \uBE4C\uB4DC3/3d\uC2A4\uD06C\uB9BD\uD2B8_\uAE30\uB9D0\uACFC\uC81C.exe"
+  playerPath: "D:/\uD559\uAD50 \uACF5\uBD80/3\uD559\uB144/3d\uAC8C\uC784/\uAE30\uB9D0
+    \uC81C\uCD9C\uBB3C/\uCD5C\uC885 \uAC8C\uC784 \uBE4C\uB4DC/3d\uC2A4\uD06C\uB9BD\uD2B8_\uAE30\uB9D0\uACFC\uC81C.exe"

@@ -68,12 +68,4 @@ public class BoxSpawn : MonoBehaviour
         }
 
     }
-
-    void OnEnable()
-    {
-        for (int i = 0; i < count; i++)
-        {
-            Box[i].transform.position= poolPosition.position;
-        }
-    }
 }

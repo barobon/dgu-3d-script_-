@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     private bool isDead = false;
+    private bool played = false;
     public static int score = 0;
     public static float enemyDist = 0;
     Animator animator;
@@ -23,14 +24,11 @@ public class GameOver : MonoBehaviour
     void Update()
     {
         isDead = Movement.dead;
-
-        if (isDead)
-        {
-            animator.SetBool("isDead", isDead);
-        }
-
+        animator.SetBool("isDead", isDead);
         ScoreText.text = "Score: "+score.ToString();
         EnemyDist.text = "Enemy Distance:" + enemyDist.ToString();
         
     }
+
+    
 }

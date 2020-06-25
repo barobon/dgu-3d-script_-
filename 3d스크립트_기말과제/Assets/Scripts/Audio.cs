@@ -7,9 +7,14 @@ public class Audio : MonoBehaviour
     private AudioSource audio;
     public AudioClip bgm;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        audio = GetComponent<AudioSource>();
+        audio.clip = bgm;
+
+        audio.volume = 1f;
+        audio.loop = true;
+        audio.mute = false;
     }
 
     // Update is called once per frame

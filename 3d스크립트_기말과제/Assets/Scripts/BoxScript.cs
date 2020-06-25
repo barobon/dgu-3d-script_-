@@ -7,11 +7,12 @@ public class BoxScript : MonoBehaviour
     private bool clicked = false;
     private bool trap = false;
     private int score;
+    public AudioSource scoreSfx;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreSfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class BoxScript : MonoBehaviour
     {
        if (collision.gameObject.CompareTag("Player") && clicked == false)
         {
+            scoreSfx.Play();
             clicked = true;
             GameOver.score++;
         }

@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     Rigidbody m_rigidbody;
     Transform m_transform;
     CapsuleCollider m_collider;
+    AudioSource m_audioSource;
 
     private float horizontal = 0;
     private float vertical = 0;
@@ -33,7 +34,7 @@ public class Movement : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         m_collider = GetComponent<CapsuleCollider>();
         startPos = transform;
-        backupSpeed = speed;
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -46,6 +47,8 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey("escape"))
+            Application.Quit();
         Fallen();
 
         if (dead == false)
@@ -94,6 +97,7 @@ public class Movement : MonoBehaviour
             {
                 isJumping = true;
                 isGrounded = false;
+                m_audioSource.Play();
 
                 animator.SetBool("isJumping", isJumping);
                 animator.SetBool("isGrounded", isGrounded);
